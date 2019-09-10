@@ -1,0 +1,24 @@
+{
+  "name": "whois-app",
+  "version": "1.0.0",
+  "description": "Have been creating several applications from scratch (mostly with the JS stack, that means NodeJS for backend, maybe an API, and some JS framework for the client side), and even though all is very simple to prepare I feel I loose some minutes doing it, or even worse, forgetting something!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/socarlosb/app-env.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/socarlosb/app-env/issues"
+  },
+  "homepage": "https://github.com/socarlosb/app-env#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "node-html-parser": "^1.1.16"
+  }
+}
