@@ -29,7 +29,7 @@ const checkArguments = () => {
   if (process.argv.length > 2) return process.argv[2]
 }
 
-const start = () => {
+exports.start = () => {
   const arg = checkArguments()
   if (!arg) {
     console.error('No arguments provided, provide a full number!')
@@ -42,5 +42,3 @@ const start = () => {
    */
   who(arg)
 }
-
-start()

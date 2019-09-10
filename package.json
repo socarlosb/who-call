@@ -1,22 +1,30 @@
 {
-  "name": "whois-app",
-  "version": "1.0.0",
-  "description": "Have been creating several applications from scratch (mostly with the JS stack, that means NodeJS for backend, maybe an API, and some JS framework for the client side), and even though all is very simple to prepare I feel I loose some minutes doing it, or even worse, forgetting something!",
+  "name": "who-call",
+  "version": "1.2.0",
+  "description": "A tiny npm command that search comments from http://ligaram-me.com based on a given phone number.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "who-call": "./bin/who-call.js"
+  },
+  "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/socarlosb/app-env.git"
+    "url": "git+https://github.com/socarlosb/who-call.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "node",
+    "who called",
+    "phone number"
+  ],
+  "author": "Carlos Barbosa <socarlosb@gmail.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/socarlosb/app-env/issues"
+    "url": "https://github.com/socarlosb/who-call/issues"
   },
-  "homepage": "https://github.com/socarlosb/app-env#readme",
+  "homepage": "https://github.com/socarlosb/who-call#readme",
   "dependencies": {
     "axios": "^0.19.0",
     "node-html-parser": "^1.1.16"
