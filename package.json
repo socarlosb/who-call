@@ -1,6 +1,6 @@
 {
   "name": "who-call",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A tiny npm command that search comments from http://ligaram-me.com based on a given phone number.",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/socarlosb/who-call#readme",
   "dependencies": {
-    "axios": "^0.19.0",
-    "node-html-parser": "^1.1.16"
+    "axios": "0.21.1",
+    "node-html-parser": "3.1.5"
   }
 }
