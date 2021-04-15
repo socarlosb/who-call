@@ -1,22 +1,24 @@
 const axios = require('axios')
-const { parse } = require('node-html-parser')
+const fastdom = require('fastdomparse-node')
 
 const url = 'https://ligaram-me.com/numero'
-let html
 
 const who = (num) => {
-  const options = { lowerCaseTagName: false, script: false, style: false }
   axios
     .get(`${url}/${num}`)
     .then((res) => {
-      html = parse(res.data, options)
-      const comments = html.querySelectorAll('.comments__comment .media-body p')
+      const html = new fastdom(res.data.toString()) //, options)
+      const comments = html.querySelectorAll('.comments .media .media-body p')
       const total = comments.length
       console.info(`Found ${total} comments about number: ${num}`)
-      comments.map((el) => {
-        const removeN = el.rawText.replace(/\n/g, ' ')
-        console.info(`- ${removeN}`)
+      comments.map((el, index) => {
+        const removeN = el
+          .getInnerHTML()
+          .replace(/\n/g, ' ')
+          .replace('<span>', '')
+        console.info(`${index + 1} - ${removeN}`)
       })
+
       console.info('Information by http://ligaram-me.com')
     })
     .catch(function (error) {
@@ -25,6 +27,7 @@ const who = (num) => {
       )
     })
 }
+
 const checkArguments = () => {
   if (process.argv.length > 2) return process.argv[2]
 }
