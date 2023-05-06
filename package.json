@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/socarlosb/who-call#readme",
   "dependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "fastdomparse-node": "1.0.1"
   }
 }
