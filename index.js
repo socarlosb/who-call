@@ -1,15 +1,17 @@
 const axios = require('axios')
 const fastdom = require('fastdomparse-node')
 
-const url = 'https://ligaram-me.com/numero'
-
 const sourceList = [
   {
     title: 'ligaram-me.com',
     url: 'https://ligaram-me.com/numero',
     query: '.comments .media .media-body p',
     replaceCode: (el) => {
-      return el.getInnerHTML().replace(/\n/g, ' ').replace('<span>', '')
+      return el
+        .getInnerHTML()
+        .replace(/\n/g, ' ')
+        .replace('<span>', '')
+        .replace('<span class="">', '')
     },
   },
   {
@@ -54,10 +56,15 @@ const who = (num) => {
         })
       })
       .catch(function (error) {
-        console.error(
-          "Information not found, try another number (and don't use country prefix +351)"
-        )
-        console.error({ error })
+        if (error.response.status === 404) {
+          console.error(
+            `Information not found on ${error.config.url}, try another number (and don't use country prefix +351)`
+          )
+        } else {
+          console.error(
+            `There was some error on ${error.config.url}, try another number (and don't use country prefix +351)`
+          )
+        }
       })
   })
 }
