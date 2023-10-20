@@ -1,6 +1,6 @@
 {
   "name": "who-call",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A tiny npm command that search comments from some sources (ex.: http://ligaram-me.com) based on a given phone number from Portugal.",
   "main": "index.js",
   "scripts": {
