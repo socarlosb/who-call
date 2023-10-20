@@ -3,29 +3,63 @@ const fastdom = require('fastdomparse-node')
 
 const url = 'https://ligaram-me.com/numero'
 
-const who = (num) => {
-  axios
-    .get(`${url}/${num}`)
-    .then((res) => {
-      const html = new fastdom(res.data.toString()) //, options)
-      const comments = html.querySelectorAll('.comments .media .media-body p')
-      const total = comments.length
-      console.info(`Found ${total} comments about number: ${num}`)
-      comments.map((el, index) => {
-        const removeN = el
-          .getInnerHTML()
-          .replace(/\n/g, ' ')
-          .replace('<span>', '')
-        console.info(`${index + 1} - ${removeN}`)
-      })
+const sourceList = [
+  {
+    title: 'ligaram-me.com',
+    url: 'https://ligaram-me.com/numero',
+    query: '.comments .media .media-body p',
+    replaceCode: (el) => {
+      return el.getInnerHTML().replace(/\n/g, ' ').replace('<span>', '')
+    },
+  },
+  {
+    title: 'ligaram.me',
+    url: 'https://ligaram.me',
+    query: '.timeline .timeline-item .timeline-content article p',
+    replaceCode: (el) => {
+      return el.getInnerHTML()
+    },
+  },
+  {
+    title: 'tellows.pt',
+    url: 'https://www.tellows.pt/num',
+    query: '#singlecomments .comment-body',
+    replaceCode: (el) => {
+      const time = el
+        .querySelector('.comment-meta')
+        .getInnerHTML()
+        .replace(/\n/g, '')
+        .trim()
+      const comment = el.querySelectorAll('p')[1].getInnerHTML()
+      return `On ${time} > ${comment}`
+    },
+  },
+]
 
-      console.info('Information by http://ligaram-me.com')
-    })
-    .catch(function (error) {
-      console.log(
-        "Information not found, try another number (and don't use country prefix +351)"
-      )
-    })
+const who = (num) => {
+  sourceList.map((source) => {
+    axios
+      .get(`${source.url}/${num}`)
+      .then((res) => {
+        const html = new fastdom(res.data.toString()) //, options)
+        const comments = html.querySelectorAll(source.query)
+        const total = comments.length
+        console.info('------------------------')
+        console.info(
+          `Found ${total} comments about number: ${num} on ${source.title}`
+        )
+        comments.map((el, index) => {
+          const removeN = source.replaceCode(el)
+          console.info(`${index + 1} - ${removeN}`)
+        })
+      })
+      .catch(function (error) {
+        console.error(
+          "Information not found, try another number (and don't use country prefix +351)"
+        )
+        console.error({ error })
+      })
+  })
 }
 
 const checkArguments = () => {
